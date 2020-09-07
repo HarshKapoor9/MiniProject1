@@ -1,0 +1,246 @@
+
+<!-- HTML -->
+<html>
+<head></head>
+<style>
+  body
+  {
+    background-color: rgb(252, 252, 148);
+  }
+  #myCanvas
+  {
+     /*background-color: blue;*/
+     border:2px solid brown;
+    
+  }
+  #myCanvas1
+  {
+    display: none;
+    margin-top: 0px;
+    border:2px solid black;
+
+
+  }
+    #myCanvas3
+  {
+    display: none;
+    margin-top: 0px;
+    border:2px solid blue;
+
+  }
+    #myCanvas4
+  {
+    display: none;
+    margin-top: 0px;
+    border:2px solid green;
+
+
+  }
+      #myCanvas5
+  {
+    display: none;
+    margin-top: 0px;
+    border:2px solid red;
+
+
+  }
+</style>
+  <body>
+    <div>
+        <h3>Filter Form</h3>
+
+        <canvas id= "myCanvas" width="700" height="400"></canvas>
+        <canvas id= "myCanvas1" width="700" height="400"></canvas>
+        <canvas id= "myCanvas3" width="700" height="400"></canvas>
+ 
+        <canvas id= "myCanvas5" width="700" height="400"></canvas>
+
+        <canvas id= "myCanvas4" width="700" height="400"></canvas><br><br>
+
+
+        <h3>Load Image</h3>
+      <input type="file" id="imageInput" accept = "image/*">
+      <h3>Choose Filters</h3>
+      <button onclick="ApplyGrayScale();">GrayScale</button>
+      <button onclick="ApplyBlue();">Blue</button><br><br>
+      <button onclick="ApplyRed();">Red</button>
+      <button onclick="Original();">Original</button>
+
+    
+    </div>
+  </body>
+</html>
+
+<!-- Javascript -->
+<script>
+  let imgInput = document.getElementById('imageInput');
+  imgInput.addEventListener('change', function(e) {
+    if(e.target.files) {
+      let imageFile = e.target.files[0]; //here we get the image file
+      var reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+      reader.onloadend = function (e) {
+        var myImage = new Image(); // Creates image object
+         myImage1 = new Image(); // Creates image object
+         myImage2 = new Image(); // Creates image object
+         myImage3 = new Image(); // Creates image object
+
+        myImage.src = e.target.result; // Assigns converted image to image object
+        // localStorage.setItem('myimg',JSON.stringify(e.target.result));
+        myImage.onload = function(ev) {
+           // document.getElementById('myCanvas').style.display="block";
+
+          var myCanvas = document.getElementById("myCanvas"); // Creates a canvas object
+          var myContext = myCanvas.getContext("2d"); // Creates a contect object
+          myCanvas.width = myImage.width; // Assigns image's width to canvas
+          myCanvas.height = myImage.height; // Assigns image's height to canvas
+          
+          myContext.drawImage(myImage,0,0); // Draws the image on canvas
+
+          let imgData = myCanvas.toDataURL("image/jpeg",0.75); // Assigns image base64 string in jpeg format to a variable
+        }
+
+      }
+    }
+  });
+
+  //apply grayscale
+        function ApplyGrayScale()
+        {
+          alert("gray")
+          document.getElementById('myCanvas1').style.display="block";
+           document.getElementById('myCanvas').style.display="none";
+           document.getElementById('myCanvas4').style.display="none";
+           document.getElementById('myCanvas3').style.display="none";
+           document.getElementById('myCanvas5').style.display="none";
+
+
+             let imageFile = imgInput.files[0]; //here we get the image file
+      var reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+            reader.onloadend = function (e) {
+   
+         myImage1 = new Image(); // Creates image object
+   
+
+        myImage1.src = e.target.result; // Assigns converted image to image object
+        // localStorage.setItem('myimg',JSON.stringify(e.target.result));
+        myImage1.onload = function(ev) {
+                     var myCanvas = document.getElementById("myCanvas1");
+var myContext = myCanvas.getContext("2d");
+          myCanvas.width = myImage1.width; // Assigns image's width to canvas
+          myCanvas.height = myImage1.height; // Assigns image's height to canvas
+          myContext.filter = "grayscale(90%)";
+          myContext.drawImage(myImage1,0,0); // Draws the image on canvas
+
+          // let imgData = myCanvas.toDataURL("image/jpeg",0.75); // Assigns image base64 string in jpeg format to a variable
+        }
+
+      }
+
+      }
+    //apply blue
+    function ApplyBlue()
+    {
+      
+          alert("blue")
+          document.getElementById('myCanvas3').style.display="block";
+           document.getElementById('myCanvas').style.display="none";
+           document.getElementById('myCanvas1').style.display="none";
+           document.getElementById('myCanvas4').style.display="none";
+           document.getElementById('myCanvas5').style.display="none";
+
+
+             let imageFile = imgInput.files[0]; //here we get the image file
+      var reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+            reader.onloadend = function (e) {
+   
+         myImage1 = new Image(); // Creates image object
+   
+
+        myImage1.src = e.target.result; // Assigns converted image to image object
+        // localStorage.setItem('myimg',JSON.stringify(e.target.result));
+        myImage1.onload = function(ev) {
+                     var myCanvas = document.getElementById("myCanvas3");
+var myContext = myCanvas.getContext("2d");
+          myCanvas.width = myImage1.width; // Assigns image's width to canvas
+          myCanvas.height = myImage1.height; // Assigns image's height to canvas
+          myContext.filter = "hue-rotate(290deg)";
+          myContext.drawImage(myImage1,0,0); // Draws the image on canvas
+
+          // let imgData = myCanvas.toDataURL("image/jpeg",0.75); // Assigns image base64 string in jpeg format to a variable
+        }
+
+      }
+    }
+        function ApplyRed()
+    {
+      
+          alert("blue")
+          document.getElementById('myCanvas5').style.display="block";
+           document.getElementById('myCanvas').style.display="none";
+           document.getElementById('myCanvas1').style.display="none";
+           document.getElementById('myCanvas4').style.display="none";
+           document.getElementById('myCanvas3').style.display="none";
+
+
+             let imageFile = imgInput.files[0]; //here we get the image file
+      var reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+            reader.onloadend = function (e) {
+   
+         myImage1 = new Image(); // Creates image object
+   
+
+        myImage1.src = e.target.result; // Assigns converted image to image object
+        // localStorage.setItem('myimg',JSON.stringify(e.target.result));
+        myImage1.onload = function(ev) {
+                     var myCanvas = document.getElementById("myCanvas5");
+var myContext = myCanvas.getContext("2d");
+          myCanvas.width = myImage1.width; // Assigns image's width to canvas
+          myCanvas.height = myImage1.height; // Assigns image's height to canvas
+          myContext.filter = "hue-rotate(90deg)";
+          myContext.drawImage(myImage1,0,0); // Draws the image on canvas
+
+          let imgData = myCanvas.toDataURL("image/jpeg",0.75); // Assigns image base64 string in jpeg format to a variable
+        }
+
+      }
+    }
+
+        function Original()
+    {
+      
+          alert("original")
+          document.getElementById('myCanvas4').style.display="block";
+           document.getElementById('myCanvas3').style.display="none";
+           document.getElementById('myCanvas1').style.display="none";
+           document.getElementById('myCanvas').style.display="none";
+           document.getElementById('myCanvas5').style.display="none";
+
+
+             let imageFile = imgInput.files[0]; //here we get the image file
+      var reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+            reader.onloadend = function (e) {
+   
+         myImage1 = new Image(); // Creates image object
+   
+
+        myImage1.src = e.target.result; // Assigns converted image to image object
+        // localStorage.setItem('myimg',JSON.stringify(e.target.result));
+        myImage1.onload = function(ev) {
+                     var myCanvas = document.getElementById("myCanvas4");
+var myContext = myCanvas.getContext("2d");
+          myCanvas.width = myImage1.width; // Assigns image's width to canvas
+          myCanvas.height = myImage1.height; // Assigns image's height to canvas
+          // myContext.filter = "grayscale(90%)";
+          myContext.drawImage(myImage1,0,0); // Draws the image on canvas
+
+          // let imgData = myCanvas.toDataURL("image/jpeg",0.75); // Assigns image base64 string in jpeg format to a variable
+        }
+
+      }
+    }
+</script>
